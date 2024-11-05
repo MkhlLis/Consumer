@@ -1,7 +1,4 @@
 using Consumer;
 
-var builder = Host.CreateApplicationBuilder(args);
-builder.Services.AddHostedService<Worker>();
-
-var host = builder.Build();
+var host = Startup.IntitializeApp(args);
 host.Run();

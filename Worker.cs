@@ -1,12 +1,17 @@
+using avro;
+using Consumer.Interfaces;
+
 namespace Consumer;
 
 public class Worker : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
+    private readonly IMessageConsumer _consumer;
 
-    public Worker(ILogger<Worker> logger)
+    public Worker(ILogger<Worker> logger, IMessageConsumer consumer)
     {
         _logger = logger;
+        _consumer = consumer;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -18,7 +23,9 @@ public class Worker : BackgroundService
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
             }
 
-            await Task.Delay(1000, stoppingToken);
+            await _consumer.ConsumeAsync(stoppingToken);
+
+            await Task.Delay(10000, stoppingToken);
         }
     }
 }
