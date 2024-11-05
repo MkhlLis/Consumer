@@ -13,7 +13,7 @@
 
 **1. Сервис реализует MVP получения сообщений из Kafka**
 Особенности:
-1. Использован Confluent.Kafka.DependencyInjection, конфгурация продюсера реализована через appsettings.json:
+1. Использован Confluent.Kafka.DependencyInjection, конфгурация консьюмера реализована через appsettings.json:
 ```JSON
 "Kafka": {
     "Consumer": {
